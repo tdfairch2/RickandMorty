@@ -66,22 +66,35 @@ int16_t last, value;
 const int msDelay = 500;
 
 
-/***********************************************************
-*       Set up the sound fx pinouts
-* T03 doesn't work & I can't resolve the issue
-* T06 & T07 are probably offensive 
-* and have been placed at C106 and C107
-************************************************************/
-#define portalGunPin         0      //Portal, T00
-#define sound01              1      //Pickle Rick, T01
-#define sound02              2      //Tiny Rick, T02
-#define sound03              3      //Mr Meeseeks, T03  This one doesn't work
-#define sound04              4      //Peace oot, T04
-#define sound05              5      //Wrecked, T05
-#define sound06              6      //Party bitch, T06 
-#define sound07              7      //Lick my balls T07
-#define sound08              8      //Wrecked, T05
-#define sound09              9      //Party bitch, T06
+/*************************************************************************************************************************************************************************
+*                       Set up the sound fx pinouts
+* The soundboard allows for only 10 ogg files because it has 10 output pins and the files stored in its memory are identified by number,
+*  starting with 01 and ending with 10, depending on how many sound files are to be used.
+* 
+* 
+* For the Pro Trinket, the sound file names are merely references.  I think they can be anything.  They are defined in the statements below.  
+*    These names trigger the output pins to which they are assigned, listed next to them.
+*
+* The six Pro Trinket output pins available for sounds are pins 3 thru 9. Pin 8 is not labeled on the Pro Trinket so I skipped it.  For clarity each of the six pins used 
+*    is connected to the corresponding numbered pin on the sound board.
+*
+* The numbered pin on the sound board plays whichever ogg file has that number.  i.e. sound file 'T04' is the name of an ogg audio file on the sound board.
+*    Sound file T04 will be output whenever pin 04 on the sound board is triggered.  Pin 04 is connected to Trinket pin 4, and it is assigned to the variable name 'pickleRick'
+*    in the sketch.  So when the sketch correctly uses the name 'pickleRick', it triggers pin 4 on the Pro Trinket which triggers pin 04 on the sound board, 
+*    which causes ogg file T04 to play.
+*
+* Sound files T00, T01, T02, T08 and T10 are included on soundboard.  They have not been integrated into the code because I think there are fewer pinouts on the pro trinket
+*    available for sound than were available on the Arduino board I used to prototype this project, and I did not wish to go to the effort to test this.
+*
+* Just make sure that 1) the pinouts on the Pro Trinket connect to the desired pinouts on the sound board and 2) the names of the sound files match the desired pinouts on the
+*    sound board.  If you get either of these wrong you will not get the sound file you want for your dimension location
+/*************************************************************************************************************************************************************************/
+#define portalGunPin         3      //Portal, T03
+#define pickleRick           4      //Pickle Rick, T04
+#define tinyRick             5      //Tiny Rick, T05
+#define peaceOot             6      //Peace oot, T06 
+#define partyBiiiiitch       7      //Party bitch, T07
+#define riggityWreckedSon    9      //Wrecked, T09
 /************************************************************/
 /************************************************************/
 
@@ -128,15 +141,11 @@ void setup() {
 /****Initialize the sound fx pinouts and topBulb to be output pins *******/
 /*************************************************************************/
   pinMode(portalGunPin, OUTPUT);
-  pinMode(sound01, OUTPUT);
-  pinMode(sound02, OUTPUT);
-  pinMode(sound03, OUTPUT);
-  pinMode(sound04, OUTPUT);
-  pinMode(sound05, OUTPUT);
-  pinMode(sound06, OUTPUT);
-  pinMode(sound07, OUTPUT);
-  pinMode(sound08, OUTPUT);
-  pinMode(sound09, OUTPUT);
+  pinMode(pickleRick, OUTPUT);
+  pinMode(tinyRick, OUTPUT);
+  pinMode(peaceOot, OUTPUT);
+  pinMode(partyBiiiiitch, OUTPUT);
+  pinMode(riggityWreckedSon, OUTPUT);
 /*************************************************************************/
 /*************************************************************************/
 
@@ -153,15 +162,11 @@ void setup() {
  * they become active, then become inactive when set to 'HIGH'.
  *******************************************************************************/
   digitalWrite(portalGunPin, HIGH);
-  digitalWrite(sound01, HIGH);
-  digitalWrite(sound02, HIGH);
-  digitalWrite(sound03, HIGH);
-  digitalWrite(sound04, HIGH);
-  digitalWrite(sound05, HIGH);
-  digitalWrite(sound06, HIGH);
-  digitalWrite(sound07, HIGH);
-  digitalWrite(sound08, HIGH);
-  digitalWrite(sound09, HIGH);
+  digitalWrite(pickleRick, HIGH);
+  digitalWrite(tinyRick, HIGH);
+  digitalWrite(peaceOot, HIGH);
+  digitalWrite(partyBiiiiitch, HIGH);
+  digitalWrite(riggityWreckedSon, HIGH);
 /******************************************************************************
  ******************************************************************************/
 
@@ -178,19 +183,16 @@ void loop() {
   if (justWokeUp) {
 
 
-/***************************************************************************/
-/*****  At 'wake-up', sound fx are turned off by setting to HIGH  **********
-******* Seems redundant but otherwise they trigger constantly  ************/
-    digitalWrite(portalGunPin, HIGH);    
-    digitalWrite(sound01, HIGH);
-    digitalWrite(sound02, HIGH);
-    digitalWrite(sound03, HIGH);
-    digitalWrite(sound04, HIGH);
-    digitalWrite(sound05, HIGH);
-    digitalWrite(sound06, HIGH);
-    digitalWrite(sound07, HIGH);
-    digitalWrite(sound08, HIGH);
-    digitalWrite(sound09, HIGH);
+/***************************************************************************
+*  At 'wake-up', sound fx are turned off by setting to HIGH
+* Seems redundant but otherwise they trigger constantly
+***************************************************************************/
+    digitalWrite(portalGunPin, HIGH);
+    digitalWrite(pickleRick, HIGH);
+    digitalWrite(tinyRick, HIGH);
+    digitalWrite(peaceOot, HIGH);
+    digitalWrite(partyBiiiiitch, HIGH);
+    digitalWrite(riggityWreckedSon, HIGH);
 /***************************************************************************/
 /***************************************************************************/
 
@@ -222,15 +224,11 @@ void loop() {
 *  At shut-down, sound fx are turned off
 ****************************************************************************/
       digitalWrite(portalGunPin, HIGH);
-      digitalWrite(sound01, HIGH);
-      digitalWrite(sound02, HIGH);
-      digitalWrite(sound03, HIGH);
-      digitalWrite(sound04, HIGH);
-      digitalWrite(sound05, HIGH);
-      digitalWrite(sound06, HIGH);
-      digitalWrite(sound07, HIGH);
-      digitalWrite(sound08, HIGH);
-      digitalWrite(sound09, HIGH);
+      digitalWrite(pickleRick, HIGH);
+      digitalWrite(tinyRick, HIGH);
+      digitalWrite(peaceOot, HIGH);
+      digitalWrite(partyBiiiiitch, HIGH);
+      digitalWrite(riggityWreckedSon, HIGH);
 /***************************************************************************
 ***************************************************************************/
 
@@ -319,53 +317,35 @@ void loop() {
 ***************************************************************************************/
       if (dimensionLetter == 'C' && value == 136){
                   delay (500);
-                  digitalWrite(sound01, LOW);
+                  digitalWrite(peaceOot, LOW);
                   delay (500);
-                  digitalWrite(sound01, HIGH);
+                  digitalWrite(peaceOot, HIGH);
       }
 
       else if (dimensionLetter == 'C' && value == 135){
                   delay (500);
-                  digitalWrite(sound02, LOW);
+                  digitalWrite(tinyRick, LOW);
                   delay (500);
-                  digitalWrite(sound02, HIGH);
+                  digitalWrite(tinyRick, HIGH);
       }
       else if (dimensionLetter == 'C' && value == 134){
                   delay (500);
-                  digitalWrite(sound04, LOW);
+                  digitalWrite(pickleRick, LOW);
                   delay (500);
-                  digitalWrite(sound04, HIGH);
+                  digitalWrite(pickleRick, HIGH);
       }
       else if (dimensionLetter == 'C' && value == 133){
                   delay (500);
-                  digitalWrite(sound05, LOW);
+                  digitalWrite(partyBiiiiitch, LOW);
                   delay (500);
-                  digitalWrite(sound05, HIGH);
-      }
-      else if (dimensionLetter == 'C' && value == 106){
-                  delay (500);
-                  digitalWrite(sound06, LOW);
-                  delay (500);
-                  digitalWrite(sound06, HIGH);
-      }
-      else if (dimensionLetter == 'C' && value == 107){
-                  delay (500);
-                  digitalWrite(sound07, LOW);
-                  delay (500);
-                  digitalWrite(sound07, HIGH);            
+                  digitalWrite(partyBiiiiitch, HIGH);
       }
       else if (dimensionLetter == 'C' && value == 132){
                   delay (500);
-                  digitalWrite(sound08, LOW);
+                  digitalWrite(riggityWreckedSon, LOW);
                   delay (500);
-                  digitalWrite(sound08, HIGH);
+                  digitalWrite(riggityWreckedSon, HIGH);
       }
-      else if (dimensionLetter == 'C' && value == 131){
-                  delay (500);
-                  digitalWrite(sound09, LOW);
-                  delay (500);
-                  digitalWrite(sound09, HIGH);            
-            }
 /************************************************************************************
 * If a sound fx location is not selected, run the Firing Sequence.
 * Flash the LED's and the word FIRE five times simultaneously
@@ -592,3 +572,51 @@ void displayTest() {
     delay(300);
   }
 }*/
+
+
+/* Some quotes:
+
+“Nobody exists on purpose, nobody belongs anywhere, everybody's gonna die.  Come watch TV.”
+          -	Morty Smith, "Rixty Minutes"
+
+
+“It’s a never-ending fart joke wrapped around a studied look into nihilism.”
+          -	Kayla Cobb, ‘Rick and Morty’ Is Better When It Embraces Its Strong Women’, 
+          Decider, Oct. 4, 2017
+
+
+Rick: Great, now I have to take over a whole Planet because of your Stupid Boobs!
+
+Rick: [knife at his throat] Are you a simulation Morty? Are you, you little bitch? Are you a simulation Morty?
+Morty: No!
+Rick: Ah right. Sorry Morty. You're a good kid. You're a good kid Morty.
+[Falls asleep]
+Morty: What? Oh God! What a life...
+
+Chief: Well done, Babylegs, you've learned a valuable lesson about teamwork and accepting your own limitations. Now get the fuck out!
+
+Mr Poopy Butthole: Oooh weee! Is this how I die?
+
+Plutonian: Is everyone in your Family an Idiot?
+Morty: For sure me and my Dad are!
+ 
+
+
+Dr. Wong:  Why didn't you want to come here?
+
+Rick:     Because I don't respect Therapy.  Because I'm a Scientist. Because I invent, transform, create and destroy for a living 
+and when I don't like something about the World I change it.  And I don't think going to some rented office in a strip mall 
+to listen to an Agent of Averageness explain which words mean which feelings has ever helped anyone do anything.  
+I expect it's helped a lot of people get comfortable and stop panicking, which is a state of mind we value in the animals we eat 
+but not something I want for myself.  I'm not a cow!  I'm a Pickle!  When I feel like it.  
+So, you asked…
+Dr. Wong:  Rick, the only connection between your unquestionable intelligence and the sickness destroying your family is that 
+everyone in your family, you included, use intelligence to justify sickness.  You seem to alternate between viewing your own mind 
+as an unstoppable force and as an inescapable curse.  And I think it's because the only truly unapproachable concept for you is that 
+it's your mind within your control.  You chose to come here, you chose to talk to belittle my vocation, just as you chose to become a pickle.  
+You are the master of your universe, and yet you are dripping with rat blood and feces.  Your enormous mind literally vegetating 
+by your own hand. I have no doubt that you would be bored senseless by therapy, the same way I'm bored when I brush my teeth and wipe my ass.  
+Because the thing about repairing, maintaining, and cleaning is it's not an adventure.  There's no way to do it so wrong you might die.  
+It's just work.  And the bottom line is, some people are okay going to work, and some people... well, some people would rather die.  
+Each of us gets to choose.
+*/
