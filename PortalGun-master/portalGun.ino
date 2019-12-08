@@ -1,3 +1,5 @@
+/* This is my very favorite project utilizing C++ programming.  I have created this repo as a record of my work but have made 
+  updates to ensure inclusion in the GitHub Archive Progam, to have something as a legacy*/
 #include <ClickEncoder.h>
 
 #include <TimerOne.h>
