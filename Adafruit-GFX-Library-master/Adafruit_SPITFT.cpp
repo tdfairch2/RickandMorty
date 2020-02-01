@@ -28,7 +28,7 @@
 
 
 
-// Pass 8-bit (each) R,G,B, get back 16-bit packed color
+// Pass 8-bit (each) R,G,B, get back 16-bit packed color.
 uint16_t Adafruit_SPITFT::color565(uint8_t r, uint8_t g, uint8_t b) {
     return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3);
 }
@@ -162,6 +162,7 @@ void Adafruit_SPITFT::spiWrite(uint8_t b) {
 
 /*
  * Transaction API
+ *
  * */
 
 void Adafruit_SPITFT::startWrite(void){
